@@ -1,0 +1,22 @@
+service: golang_lambda_s3_sample
+
+provider:
+  name: aws
+  runtime: go1.x
+  timeout: 300
+  region: ap-northeast-1
+  stage: ${opt:stage, self:custom.defaultStage}
+
+custom:
+  defaultStage: develop
+  otherfile:
+    environment:
+      develop: ${file(./conf/develop.yml)}
+
+package:
+  include:
+    - ./bin/main
+
+functions:
+  exec:
+    handler: bin/main
