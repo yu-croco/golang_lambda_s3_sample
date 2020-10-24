@@ -20,3 +20,5 @@ package:
 functions:
   exec:
     handler: bin/main
+    environment:
+      BUCKET_NAME: ${self:custom.otherfile.environment.${self:provider.stage}.BUCKET_NAME}
